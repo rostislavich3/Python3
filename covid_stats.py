@@ -9,8 +9,8 @@ url = "https://www.worldometers.info/coronavirus/country/"
 
 link = url.__add__(country)
 
-def get_covid_stats():
 
+def get_covid_stats():
     r = requests.get(link)
 
     normal_view = BeautifulSoup(r.content, 'html.parser')
@@ -31,13 +31,21 @@ def get_covid_stats():
 
     head, sep, tail = snipple.partition('-')
 
-    data = "Today's COVID-19 statistics for: \n" + result.split(" ")[2] + " \n" + head
+    total_cases = head.split(" ")[1]
+
+    total_deaths = head.split(" ")[4]
+
+    delta_deaths = str(float(total_deaths.replace(',', '.')))
+
+    delta_cases = str(float(total_cases.replace(',', '.')))
+
+    data = "Today's COVID-19 statistics for: \n" + result.split(" ")[2] + " \n" + head + "\n" + "Total deaths: " +\
+           delta_deaths + "\n" + "Total cases: " + delta_cases
 
     return data
 
 
 def sender_bot():
-
     creds = {
         "username": username,
         "password": password,
