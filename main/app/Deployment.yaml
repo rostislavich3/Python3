@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: covidstats
+  labels:
+    app: covidstats
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: covidstats
+  template:
+    metadata:
+      labels:
+        app: covidstats
+    spec:
+      containers:
+      - name: covidstats
+        image: 929115b598e3
